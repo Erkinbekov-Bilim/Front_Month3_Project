@@ -49,3 +49,33 @@ const moveBlock = () => {
 
 moveBlock()
 
+// STOP WATCH
+
+const seconds = document.querySelector("#seconds")
+const btn_start = document.querySelector("#start")
+const btn_stop = document.querySelector("#stop")
+const btn_reset = document.querySelector("#reset")
+
+const timer = () => {
+    let time = 0
+    let interval;
+
+    btn_start.onclick = () => {
+        clearInterval(interval)
+        interval = setInterval(() => {
+            time++
+            seconds.innerHTML = time
+        }, 1000)
+    }
+    btn_stop.onclick = () => {
+        clearInterval(interval)
+    }
+    btn_reset.onclick = () => {
+        clearInterval(interval)
+        time = 0
+        seconds.innerHTML = time
+    }
+}
+
+timer()
+
