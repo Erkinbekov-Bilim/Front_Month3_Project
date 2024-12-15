@@ -68,4 +68,3 @@ tabsParent.onclick = (event) => {
 }
 
 
-

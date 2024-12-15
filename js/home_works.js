@@ -61,11 +61,12 @@ const timer = () => {
     let interval;
 
     btn_start.onclick = () => {
-        clearInterval(interval)
-        interval = setInterval(() => {
-            time++
-            seconds.innerHTML = time
-        }, 1000)
+        if (!interval){
+            interval = setInterval(() => {
+                time++
+                seconds.innerHTML = time
+            }, 1000)
+        }
     }
     btn_stop.onclick = () => {
         clearInterval(interval)
@@ -78,4 +79,47 @@ const timer = () => {
 }
 
 timer()
+
+// CHARACTERS
+
+const character_list = document.querySelector(".characters-list")
+
+const getCharacters = () => {
+    const request = new XMLHttpRequest()
+    request.open("GET", "../data/characters.json")
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send()
+
+    request.onload = () => {
+        const data = JSON.parse(request.response)
+        data.forEach((character) => {
+            const character_item = document.createElement("div")
+            character_item.setAttribute("class", "character-item")
+            character_item.innerHTML = `
+                <p class="character-name">${character.name}</p>
+                <div class="character-photo">
+                    <img src="${character.photo}" alt="">
+                </div>
+                <p class="character-desc">${character.desc}</p>
+            `
+            console.log(character_item)
+        character_list.appendChild(character_item)
+        })
+    }
+}
+
+const getCountries = () => {
+    const request = new XMLHttpRequest()
+    request.open("GET", "../data/any.json")
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send()
+
+    request.onload = () => {
+        const data = JSON.parse(request.response)
+        console.log(data)
+    }
+}
+
+getCountries()
+getCharacters()
 
