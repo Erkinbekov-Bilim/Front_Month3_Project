@@ -16,7 +16,7 @@ const closeModal = () => {
 
 modalTrigger.onclick = openModal
 modalCloseButton.onclick = closeModal
-setInterval(openModal, 10000)
+// setInterval(openModal, 10000)
 
 modal.onclick = (event) => {
     if (event.target === modal) {
