@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Lessons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/core.css">
     <link rel="stylesheet" href="../css/lessons.css">
@@ -15,86 +18,95 @@
             <div class="inner_header">
                 <a href="../index.html">
                     <div class="logotype">
-                        <h2>Java<span>Script</span></h2>
+                        <img src="../images/logo-mm.png">
                     </div>
                 </a>
                 <ul class="menu">
                     <li class="menu_link">
-                        <a href="../pages/home_works.html">Home Works</a>
+                        <a href="../pages/home_works.html">Персонажи</a>
                     </li>
                     <li class="menu_link">
-                        <a href="../pages/lessons.html">Lessons</a>
+                        <a href="../pages/lessons.html">Локации</a>
                     </li>
                     <li class="menu_link">
-                        <a href="https://t.me/NurDinBuy16" target="_blank">Send message</a>
+                        <a href="../pages/characters.html">Карточки</a>
+                    </li>
+                    <li class="menu_link">
+                        <a href="../pages/music.html">Музыка</a>
                     </li>
                 </ul>
-                <button class="btn" id="btn-get">Click me!</button>
+                <button class="btn" id="btn-get">Присоединиться</button>
             </div>
         </div>
     </div>
 
-    <div class="phone_block">
-        <div class="container">
-            <h3>Phone checker</h3>
-            <div class="inner_phone_block">
-                <div class="form_phone">
-                    <label for="phone_input">Phone Number</label>
-                    <input type="text" id="phone_input" placeholder="+996 XXX XX-XX-XX">
-                    <button class="btn" id="phone_button">Check number</button>
-                    <span class="checker" id="phone_result"></span>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="phone_block">-->
+<!--        <div class="container">-->
+<!--            <h3>Phone checker</h3>-->
+<!--            <div class="inner_phone_block">-->
+<!--                <div class="form_phone">-->
+<!--                    <label for="phone_input">Phone Number</label>-->
+<!--                    <input type="text" id="phone_input" placeholder="+996 XXX XX-XX-XX">-->
+<!--                    <button class="btn" id="phone_button">Check number</button>-->
+<!--                    <span class="checker" id="phone_result"></span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="tab_slider">
         <div class="container">
-            <h3>tab slider</h3>
             <div class="inner_tab_slider">
                 <div class="tab_contents_block">
 
                     <div class="tab_content_block">
-                        <h4>Делегирование событий</h4>
-                        <p>В JavaScript делегирование событий - это когда мы используем один обработчик событий для
-                            группы элементов, вместо того чтобы назначать отдельный обработчик каждому элементу. Когда
-                            происходит событие на одном из элементов, оно перехватывается общим обработчиком, который
-                            определяет, какой элемент вызвал событие, и выполняет соответствующие действия.</p>
+                        <h3>Ratau's hut</h3>
+                        <div class="tab_content_block_image">
+                            <img src="../images/Ratau_hut.jpg">
+                        </div>
+                        <p>The Lonely Shack is where Ratau lives. Each biome has an NPC that will be added to the location, which you can play Knucklebones with.</p>
                     </div>
+
                     <div class="tab_content_block">
-                        <h4>classList</h4>
-                        <p>classList в JavaScript - это свойство, которое позволяет нам работать с классами элемента
-                            HTML. С помощью classList мы можем добавлять, удалять или проверять наличие классов у
-                            элемента. Допустим, у нас есть элемент на веб-странице, и мы хотим изменить его классы с
-                            помощью JavaScript. Вместо того, чтобы обращаться напрямую к атрибуту class, мы можем
-                            использовать свойство classList этого элемента. </p>
+                        <h3>Fishing spot</h3>
+                        <div class="tab_content_block_image">
+                            <img src="../images/Fishing_spot.jpg">
+                        </div>
+                        <p>The coastal area of the realm, home to a derelict boat landing and a curious Fisherman on it. The Lighthouse nearby offers shelter, and a small cult you can recruit.</p>
                     </div>
+
                     <div class="tab_content_block">
-                        <h4>add()</h4>
-                        <p>Метод add позволяет добавить новый класс к списку классов элемента. Например,
-                            element.classList.add('new-class') добавит класс с именем "new-class" к элементу.</p>
+                        <h3>Tarot Cards shopt</h3>
+                        <div class="tab_content_block_image">
+                            <img src="../images/Sozo_chamber.jpg">
+                        </div>
+                        <p>The home of Sozo and his mushroom followers, this is the place where he experiments with mushrooms and their brainwashing properties.</p>
                     </div>
+
                     <div class="tab_content_block">
-                        <h4>remove()</h4>
-                        <p>Метод remove позволяет удалить класс из списка классов элемента. Например,
-                            element.classList.remove('old-class') удалит класс с именем "old-class" из элемента.</p>
+                        <h3>Plimbo</h3>
+                        <div class="tab_content_block_image">
+                            <img src="../images/Plimbo.jpg">
+                        </div>
+                        <p>Belonging to Plimbo, the Sanctuary is a source for totally legal goods.</p>
                     </div>
+
+
                     <div class="tab_content_block">
-                        <h4>contains()</h4>
-                        <p>Метод contains позволяет проверить, содержит ли элемент определенный класс. Он возвращает
-                            true, если класс присутствует, и false, если его нет. Например,
-                            element.classList.contains('highlight') вернет true, если у элемента есть класс
-                            "highlight".</p>
+                        <h3>Donation well</h3>
+                        <div class="tab_content_block_image">
+                            <img src="../images/Starfish_location.jpg">
+                        </div>
+                        <p>Midas' domain is filled with gold of all kinds and unlucky passers-by that have been turned into golden statues by him.</p>
                     </div>
 
                     <div class="tab_content_items">
-                        <div class="tab_content_item tab_content_item_active">Делегирование событий</div>
-                        <div class="tab_content_item">Class List</div>
-                        <div class="tab_content_item">add()</div>
-                        <div class="tab_content_item">remove()</div>
-                        <div class="tab_content_item">contains()</div>
+                        <div class="tab_content_item tab_content_item_active">Lonely Shack</div>
+                        <div class="tab_content_item">Pilgrim's Passage</div>
+                        <div class="tab_content_item">Spore Grotto</div>
+                        <div class="tab_content_item">Smuggler's Sanctuary</div>
+                        <div class="tab_content_item">Midas's Cave</div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -102,47 +114,64 @@
 
     <div class="converter">
         <div class="container">
-            <h3>CONVERTER</h3>
             <div class="inner_converter">
-                <div class="som">
-                    <label for="som">Som</label>
-                    <input type="number" id="som">
+                <h3>Converter</h3>
+                <div class="gold_coin currency" id="">
+                    <div class="gold_label">
+                        <label for="gold_coin">Gold Coin</label>
+                        <img src="../images/Coin.png">
+                    </div>
+                    <input type="number" id="gold_coin">
                 </div>
-                <div class="usd">
-                    <label for="usd">Usd</label>
-                    <input type="number" id="usd">
-                </div>
-                <div class="eur">
-                    <label for="eur">Eur</label>
-                    <input type="number" id="eur">
+                <div class="converter_default">
+                    <div class="som currency">
+                        <label for="som">Som</label>
+                        <input type="number" id="som">
+                    </div>
+                    <div class="usd currency">
+                        <label for="usd">Usd</label>
+                        <input type="number" id="usd">
+                    </div>
+                    <div class="eur currency">
+                        <label for="eur">Eur</label>
+                        <input type="number" id="eur">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="card_switcher">
+        <video src="../video/CHAOS-feat-Matthew-K-Heafy-Mike-Malyan-Official-Music-Video.mp4" muted autoplay playsinline loop class="video"></video>
         <div class="container">
-            <h3>Card Switcher</h3>
-            <div class="inner_card_switcher">
-                <button class="btn" id="btn-prev">prev</button>
-                <div class="card"></div>
-                <button class="btn" id="btn-next">next</button>
+            <div class="card_switcher_relative">
+                <div class="inner_card_switcher">
+                    <div class="btn_nintendo prev_nintendo">
+                        <button class="btn" id="btn-prev">prev</button>
+                    </div>
+                    <div class="nintendo_display">
+                        <div class="card"></div>
+                    </div>
+                    <div class="btn_nintendo next_nintendo">
+                        <button class="btn" id="btn-next">next</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="weather">
         <div class="container">
-            <h3>WEATHER</h3>
             <div class="inner_weather">
-                <div>
+                <h3>WEATHER</h3>
+                <div class="weather_input">
                     <input type="text" class="cityName" placeholder="Найти погоду в...">
                     <button class="btn" id="search">search</button>
                 </div>
-                <div>
+                <div class="weather_info">
                     <span class="city"></span>
-                    <hr/>
                     <span class="temp"></span>
+                    <img id="weather-icon" alt="" src="">
                 </div>
             </div>
         </div>
@@ -152,7 +181,7 @@
         <div class="container">
             <a href="https://www.instagram.com/nurdinbuy/" target="_blank">
                 <div class="inner_footer">
-                    <h2>Made by NurDinBuy</h2>
+                    <h2>Made by Bilim</h2>
                 </div>
             </a>
         </div>
@@ -163,11 +192,23 @@
     <div class="modal_dialog">
         <div class="modal_content">
             <form action="#">
-                <div class="modal_close">&#10006;</div>
-                <div class="modal_title">Мы свяжемся с вами как можно быстрее!</div>
-                <input required placeholder="Ваше имя" name="name" type="text" class="modal_input">
-                <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal_input">
-                <button class="btn btn_dark btn_min">Перезвонить мне</button>
+                <div class="modal_close">&times;</div>
+                <div class="modal_title">Оставьте заявку на присоединение к нашему культу</div>
+                <input
+                        required
+                        placeholder="Введите ваше имя"
+                        name="name"
+                        type="text"
+                        class="modal_input"
+                >
+                <input
+                        required
+                        placeholder="Введите ваш номер телефона"
+                        name="phone"
+                        type="text"
+                        class="modal_input"
+                >
+                <button class="btn btn_dark btn_min">Оставить заявку</button>
             </form>
         </div>
     </div>

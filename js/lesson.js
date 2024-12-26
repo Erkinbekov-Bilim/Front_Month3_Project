@@ -1,20 +1,20 @@
 // PHONE BLOCK
 
-const phoneInput = document.querySelector("#phone_input")
-const phoneButton = document.querySelector("#phone_button")
-const phoneResult = document.querySelector("#phone_result")
-
-const regExp = /^\+996 [2579]\d{2} \d{2}-\d{2}-\d{2}$/
-
-phoneButton.onclick = () => {
-    if (regExp.test(phoneInput.value)) {
-        phoneResult.innerHTML = "Valid"
-        phoneResult.style.color = "green"
-    } else {
-        phoneResult.innerHTML = "Invalid"
-        phoneResult.style.color = "red"
-    }
-}
+// const phoneInput = document.querySelector("#phone_input")
+// const phoneButton = document.querySelector("#phone_button")
+// const phoneResult = document.querySelector("#phone_result")
+//
+// const regExp = /^\+996 [2579]\d{2} \d{2}-\d{2}-\d{2}$/
+//
+// phoneButton.onclick = () => {
+//     if (regExp.test(phoneInput.value)) {
+//         phoneResult.innerHTML = "Valid"
+//         phoneResult.style.color = "green"
+//     } else {
+//         phoneResult.innerHTML = "Invalid"
+//         phoneResult.style.color = "red"
+//     }
+// }
 
 // TAB SLIDER
 
@@ -72,6 +72,7 @@ tabsParent.onclick = (event) => {
 const somInput = document.querySelector('#som')
 const usdInput = document.querySelector('#usd')
 const eurInput = document.querySelector('#eur')
+const goldInput = document.querySelector('#gold_coin')
 
 const converter = (element, targetElements) => {
     element.oninput = () => {
@@ -84,32 +85,43 @@ const converter = (element, targetElements) => {
             const data = JSON.parse(xhr.response)
             for (const targetElement of targetElements) {
 
-                console.log(targetElement.id)
-                console.log(`Element value: ${element.value}`)
-                console.log(`Target element value: ${targetElement.value} - ${targetElement.id}`)
-
                 if (element.id === "som") {
+                    if (targetElement.id === "usd") {
                         targetElement.value = (element.value / data.usd).toFixed(2)
-                        if (targetElement.id === "usd") {
-                    }else if (targetElement.id === "eur") {
+                    } else if (targetElement.id === "eur") {
                         targetElement.value = (element.value / data.eur).toFixed(2)
+                    } else if (targetElement.id === "gold") {
+                        targetElement.value = (element.value / (data.usd * data.gold_coin)).toFixed(2)
                     }
                 }
 
                 if (element.id === "usd") {
                     if (targetElement.id === "som") {
                         targetElement.value = (element.value * data.usd).toFixed(2)
-                    }else if (targetElement.id === "eur") {
+                    } else if (targetElement.id === "eur") {
                         targetElement.value = ((element.value * data.usd) / data.eur).toFixed(2)
+                    } else if (targetElement.id === "gold") {
+                        targetElement.value = (element.value / data.gold_coin).toFixed(2)
                     }
                 }
-
 
                 if (element.id === "eur") {
                     if (targetElement.id === "som") {
                         targetElement.value = (element.value * data.eur).toFixed(2)
-                    }else if (targetElement.id === "usd") {
+                    } else if (targetElement.id === "usd") {
                         targetElement.value = ((element.value * data.eur) / data.usd).toFixed(2)
+                    } else if (targetElement.id === "gold") {
+                        targetElement.value = ((element.value * data.eur) / (data.usd * data.gold_coin)).toFixed(2)
+                    }
+                }
+
+                if (element.id === "gold_coin") {
+                    if (targetElement.id === "som") {
+                        targetElement.value = (element.value * (data.usd * data.gold_coin)).toFixed(2)
+                    } else if (targetElement.id === "usd") {
+                        targetElement.value = (element.value * data.gold_coin).toFixed(2)
+                    } else if (targetElement.id === "eur") {
+                        targetElement.value = ((element.value * data.gold_coin) * data.usd / data.eur).toFixed(2)
                     }
                 }
 
@@ -119,9 +131,11 @@ const converter = (element, targetElements) => {
     }
 }
 
-converter(somInput, [usdInput, eurInput])
-converter(usdInput, [somInput, eurInput])
-converter(eurInput, [somInput, usdInput])
+converter(somInput, [usdInput, eurInput, goldInput])
+converter(usdInput, [somInput, eurInput, goldInput])
+converter(eurInput, [somInput, usdInput, goldInput])
+converter(goldInput, [somInput, usdInput, eurInput])
+
 
 // CARD SWITCHER
 
@@ -174,3 +188,28 @@ const fetchDataPosts = () => {
 
 
 fetchDataPosts()
+
+// Weather API
+
+const searchInput = document.querySelector('.cityName')
+const searchButton = document.querySelector("#search")
+const city = document.querySelector('.city')
+const temp = document.querySelector(".temp")
+const weatherIcon = document.querySelector("#weather-icon")
+
+// http://api.openweathermap.org/data/2.5/weather
+
+const API_URL = "http://api.openweathermap.org/data/2.5/weather"
+const API_KEY = "e417df62e04d3b1b111abeab19cea714"
+
+searchButton.onclick = () => {
+    fetch(`${API_URL}?appid=${API_KEY}&q=${searchInput.value}&units=metric`)
+        .then(response => response.json())
+        .then(data => {
+            city.innerHTML = `Город - ${data.name}` || `Город ${searchInput.value} не найден`
+            temp.innerHTML = `${data.main?.temp}` ? `Температура - ${Math.round(data.main?.temp)} &deg;` : 'Ошибка'
+            weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`
+        })
+
+    searchInput.value = ''
+}

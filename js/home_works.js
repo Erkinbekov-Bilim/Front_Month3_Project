@@ -1,88 +1,180 @@
 // GMAIL BLOCK
 
-const gmailInput = document.querySelector("#gmail_input")
-const gmailButton = document.querySelector("#gmail_button")
-const gmailResult = document.querySelector("#gmail_result")
-
-const regExp = /^[a-z]\w+@gmail\.com$/
-
-gmailButton.onclick = () => {
-    console.log(gmailInput.value.match(regExp))
-    if (regExp.test(gmailInput.value)) {
-        gmailResult.innerHTML = "Valid"
-        gmailResult.style.color = "green"
-    } else {
-        gmailResult.innerHTML = "Invalid"
-        gmailResult.style.color = "red"
-    }
-}
+// const gmailInput = document.querySelector("#gmail_input")
+// const gmailButton = document.querySelector("#gmail_button")
+// const gmailResult = document.querySelector("#gmail_result")
+//
+// const regExp = /^[a-z]\w+@cult\.com$/
+//
+// gmailButton.onclick = () => {
+//     console.log(gmailInput.value.match(regExp))
+//     if (regExp.test(gmailInput.value)) {
+//         gmailResult.innerHTML = "Valid"
+//         gmailResult.style.color = "green"
+//     } else {
+//         gmailResult.innerHTML = "Invalid"
+//         gmailResult.style.color = "red"
+//     }
+// }
 
 // MOVE BLOCK
 
-const parentBlock = document.querySelector(".parent_block")
-const childBlock = document.querySelector(".child_block")
+const parentBlock = document.querySelector(".parent_block");
+const movingCircle = document.querySelector(".moving_circle");
+const food = document.querySelector(".food");
 
-const parentSize = parentBlock.clientWidth - childBlock.offsetWidth
+const centerX = parentBlock.clientWidth / 2;
+const centerY = parentBlock.clientHeight / 2;
+const radius = centerX - 20;
+let angle = 0;
+const speed = 0.012;
 
-let positionY = 0
-let positionX = 0
+let foodPosition = { x: 0, y: 0 };
+let isFoodEaten = false;
 
-const moveBlock = () => {
-    if (positionX < parentSize && positionY === 0) {
-        positionX++
-        childBlock.style.left = `${positionX}px`
-        requestAnimationFrame(moveBlock)
-    }else if(positionX >= parentSize && positionY < parentSize){
-        positionY++
-        childBlock.style.top = `${positionY}px`
-        requestAnimationFrame(moveBlock)
-    }else if(positionY <= parentSize && positionX !== 0) {
-        positionX--
-        childBlock.style.left = `${positionX}px`
-        requestAnimationFrame(moveBlock)
-    }else if (positionX === 0 && positionY !== 0) {
-        positionY--
-        childBlock.style.top = `${positionY}px`
-        requestAnimationFrame(moveBlock);
+const spawnFood = () => {
+    const spawnAngle = angle + Math.PI / 2 + Math.random() * Math.PI;
+    foodPosition.x = centerX + radius * Math.cos(spawnAngle) - 20;
+    foodPosition.y = centerY + radius * Math.sin(spawnAngle) - 20;
+    food.style.left = `${foodPosition.x}px`;
+    food.style.top = `${foodPosition.y}px`;
+    food.style.display = "block";
+    isFoodEaten = false;
+};
+
+
+const updateMovingCircle = () => {
+    angle += speed;
+    const x = centerX + radius * Math.cos(angle) - 50;
+    const y = centerY + radius * Math.sin(angle) - 50;
+    movingCircle.style.left = `${x}px`;
+    movingCircle.style.top = `${y}px`;
+
+    if (!isFoodEaten &&
+        Math.hypot(x + 50 - foodPosition.x - 20, y + 50 - foodPosition.y - 20) <
+        20
+    ) {
+        isFoodEaten = true;
+        food.style.display = "none";
+        setTimeout(spawnFood, 200);
     }
-}
 
-moveBlock()
+    requestAnimationFrame(updateMovingCircle);
+};
+
+spawnFood();
+updateMovingCircle();
 
 // STOP WATCH
 
-const seconds = document.querySelector("#seconds")
-const btn_start = document.querySelector("#start")
-const btn_stop = document.querySelector("#stop")
-const btn_reset = document.querySelector("#reset")
+const timerElement = document.getElementById("timer");
+const startButton = document.getElementById("start");
+const resetButton = document.getElementById("reset");
+const stopButton = document.getElementById("stop");
+const scoreElement = document.getElementById("score");
+const cultistsContainer = document.getElementById("cultists");
 
-const timer = () => {
-    let time = 0
-    let interval;
+let timerInterval;
+let spawnInterval;
+let seconds = 20;
+let cultists = [];
+let score = 0;
+let isGameActive = false;
 
-    btn_start.onclick = () => {
-        if (!interval){
-            interval = setInterval(() => {
-                time++
-                seconds.innerHTML = time
-            }, 1000)
-        }
-    }
-    btn_stop.onclick = () => {
-        clearInterval(interval)
-    }
-    btn_reset.onclick = () => {
-        clearInterval(interval)
-        time = 0
-        seconds.innerHTML = time
-    }
-}
+const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const secs = (seconds % 60).toString().padStart(2, "0");
+    return `${mins}:${secs}`;
+};
 
-timer()
+const updateTimer = () => {
+    seconds--;
+    timerElement.textContent = formatTime(seconds);
+    if (seconds <= 0) {
+        endGame();
+    }
+};
+
+const createCultist = () => {
+    const cultist = document.createElement("img");
+    cultist.setAttribute("src", "../video/Lamb_Intro_31.webp");
+    cultist.classList.add("cultist");
+    cultist.style.top = Math.random() * 800 + "px";
+    cultist.style.left = Math.random() * 640 + "px";
+    cultistsContainer.appendChild(cultist);
+    cultists.push(cultist);
+    cultist.addEventListener("click", () => {
+        cultist.remove();
+        score++;
+        scoreElement.textContent = `Поймано культистов: ${score}`;
+    });
+};
+
+const moveCultists = () => {
+    cultists.forEach((cultist) => {
+        cultist.style.top = Math.random() * 270 + "px";
+        cultist.style.left = Math.random() * 270 + "px";
+    });
+};
+
+const startGame = () => {
+    if (isGameActive) return;
+    clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+    seconds = 20;
+    cultistsContainer.innerHTML = "";
+    cultists = [];
+    timerElement.textContent = "00:20";
+    startButton.disabled = true;
+    stopButton.disabled = false;
+    isGameActive = true;
+    timerInterval = setInterval(() => {
+        updateTimer();
+        moveCultists();
+    }, 1000);
+    spawnInterval = setInterval(createCultist, 2000);
+};
+
+const stopGame = () => {
+    if (!isGameActive) return;
+    clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+    isGameActive = false;
+    startButton.disabled = false;
+    stopButton.disabled = true;
+};
+
+const endGame = () => {
+    clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+    alert(`Игра окончена! Вы поймали ${score} культистов.`);
+    isGameActive = false;
+    startButton.disabled = false;
+    stopButton.disabled = true;
+};
+
+const resetGame = () => {
+    clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+    seconds = 20;
+    score = 0;
+    cultistsContainer.innerHTML = "";
+    cultists = [];
+    timerElement.textContent = "00:20";
+    scoreElement.textContent = "Поймано культистов: 0";
+    isGameActive = false;
+    startButton.disabled = false;
+    stopButton.disabled = true;
+};
+
+startButton.addEventListener("click", startGame);
+stopButton.addEventListener("click", stopGame);
+resetButton.addEventListener("click", resetGame);
+
+
+
 
 // CHARACTERS
-
-const character_list = document.querySelector(".characters-list")
 
 const getCharacters = () => {
     const request = new XMLHttpRequest()
@@ -92,20 +184,41 @@ const getCharacters = () => {
 
     request.onload = () => {
         const data = JSON.parse(request.response)
-        data.forEach((character) => {
-            const character_item = document.createElement("div")
-            character_item.setAttribute("class", "character-item")
-            character_item.innerHTML = `
-                <p class="character-name">${character.name}</p>
-                <div class="character-photo">
-                    <img src="${character.photo}" alt="">
-                </div>
-                <p class="character-desc">${character.desc}</p>
-            `
-            console.log(character_item)
-        character_list.appendChild(character_item)
-        })
+
+        renderSection("main-characters", "Main Characters", data.main);
+        renderSection("the_bishops", "The Bishops of the Old Faiths", data.the_bishops);
+        renderSection("guardians", "Guardians", data.guardians);
+        renderSection("knucklebone_players", "Knucklebone Players", data.knucklebone_players);
     }
+}
+
+const renderSection = (sectionId, sectionTitle ,characters) => {
+    const section = document.getElementById(sectionId)
+
+    // const header = document.createElement("div");
+    // header.setAttribute("class", "header-character");
+    // header.innerHTML = `
+    //     <img src="../images/Header_BG_Black.png" alt="${sectionTitle}">
+    //     <div class="header-info">
+    //         <h2>${sectionTitle}</h2>
+    //     </div>
+    // `;
+    // section.appendChild(header);
+
+    characters.forEach((character) => {
+        console.log(character.key)
+        const characterItem = document.createElement("div")
+        characterItem.setAttribute("class", "character-item")
+        characterItem.innerHTML = `
+            <div class="character-card">
+                <div class="character-photo">
+                    <img src="${character.photo}" alt="${character.name}">
+                    <p class="character-name">${character.name}</p>
+                </div>
+            </div>
+        `
+        section.appendChild(characterItem)
+    })
 }
 
 const getCountries = () => {

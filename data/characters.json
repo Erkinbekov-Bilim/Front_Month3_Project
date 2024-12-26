@@ -1,32 +1,58 @@
-[
-  {
-    "name": "Геральт",
-    "photo": "https://cdn.mos.cms.futurecdn.net/Tar22uRMrAyqDTqhBxQJYS.jpg",
-    "desc": "Ведьмак с серебристыми волосами и ярко-желтыми катящимися глазами. Специализируется на охоте за монстрами и владеет магией. Хладнокровный и умелый мечник."
-  },
-  {
-    "name":"Иеннифер ",
-    "photo": "https://img.ixbt.site/live/topics/preview/00/07/47/75/d3cc1cbdf0.jpg",
-    "desc": "Могущественная волшебница с темными волосами и изысканным обликом. Обладает острым умом, а ее заклинания часто оказывают решающее воздействие в битвах."
-  },
-  {
-    "name": "Цири",
-    "photo": "https://lh6.googleusercontent.com/proxy/gXPzgeTYD4vwGTJvFihCZ7rYUH-11VPU9WRc5OKnL7jzDbkigNXb-P8cavy5oWYWSGA7AVtMMGZSHftJma4wdDpHD_7CPnTrUqMlE-P6l3NRuujMmrmVzuXTQ0DzWfBXdyDe2zkeh4aRLHsfrWBPaMk",
-    "desc":"Молодая принцесса с ярко-зелеными глазами и дикой силой магии. Является наследницей Лесного Дома и обладает способностью путешествовать между измерениями."
-  },
-  {
-    "name": "Весемир",
-    "photo": "https://ixbt.online/gametech/covers/2022/12/27/nova-filepond-LVB65c.png?resizeStyle=aspectfit&format=jpg",
-    "desc": "Опытный ведьмак и наставник Геральта. Седовласый старец с мудрыми глазами и грубым чувством юмора. Владеет глубокими знаниями о монстрах и магии, часто является голосом разума в группе ведьмаков."
-  },
-  {
-    "name": "Данделион",
-    "photo": "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/02/rsz-dandelionv1.jpg",
-    "desc": "Веселый бард с кудрявыми волосами и острым языком. Его песни рассказывают о приключениях Геральта и становятся легендами в мире Ведьмака."
-  },
-  {
-    "name": "Вернон Роше",
-    "photo": "https://i.playground.ru/e/BoNmzgZYrnBsrKkmBWdcEQ.jpeg",
-    "desc": "Опытный наемник и лидер \"Красных банд\". Седой и харизматичный, Роше владеет мечом и тактическим мышлением, что делает его востребованным на поле битвы."
-  }
-]
+{
+  "main": [
+    {
+      "name": "The Lamb",
+      "photo": "../images/Lamb.png"
+    },
+    {
+      "name": "The Goat",
+      "photo": "../images/The_Goat.png"
+    }
+  ],
+  "the_bishops": [
+    {
+      "name": "Leshy: Bishop of Chaos",
+      "photo": "../images/Leshy.png"
+    },
+    {
+      "name": "Heket: Bishop of Famine",
+      "photo": "../images/Heket.png"
+    },
+    {
+      "name": "Kallamar: Bishop of Pestilence",
+      "photo": "../images/Kallamar.png"
+    },
+    {
+      "name": "Shamura: Bishop of Knowledge and War",
+      "photo": "../images/Shamura.png"
+    },
+    {
+      "name": "Narinder: Bishop of Death",
+      "photo": "../images/The-One-Who-Waits-Narinder-Chained.png"
+    }
+  ],
+  "guardians": [
+    {
+      "name": "Aym",
+      "photo": "../images/Aym.png"
+    },
+    {
+      "name": "Baal",
+      "photo": "../images/Baal.png"
+    }
+  ],
+  "knucklebone_players": [
+    {
+      "name": "Ratau",
+      "photo": "../images/Ratau.png"
+    },
+    {
+      "name": "Flinky",
+      "photo": "../images/Flinky.png"
+    },
+    {
+      "name": "Shrumy",
+      "photo": "../images/Shrumy.png"
+    }
+  ]
+}
