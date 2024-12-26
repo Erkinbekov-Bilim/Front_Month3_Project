@@ -1,7 +1,7 @@
 const API_URL = "https://jsonplaceholder.typicode.com/posts";
 const characterContainer = document.getElementById("characterContainer");
 
-async function fetchCharacterData() {
+const fetchCharacterData = async () => {
     try {
         const response = await fetch(API_URL)
         const data = await response.json()
@@ -12,7 +12,7 @@ async function fetchCharacterData() {
     }
 }
 
-function renderCharacters(data) {
+const renderCharacters = async (data) => {
     data.forEach((item) => {
         const card = document.createElement("div")
         card.classList.add("character_block_item")
