@@ -75,16 +75,11 @@ const eurInput = document.querySelector('#eur')
 const goldInput = document.querySelector('#gold_coin')
 
 const converter = (element, targetElements) => {
-    element.oninput = () => {
-        const xhr = new XMLHttpRequest()
-        xhr.open('GET', '../data/converter.json')
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.send()
-
-        xhr.onload = () => {
-            const data = JSON.parse(xhr.response)
+    element.oninput = async () => {
+        try {
+            const response = await fetch('../data/converter.json')
+            const data = await response.json()
             for (const targetElement of targetElements) {
-
                 if (element.id === "som") {
                     if (targetElement.id === "usd") {
                         targetElement.value = (element.value / data.usd).toFixed(2)
@@ -127,6 +122,8 @@ const converter = (element, targetElements) => {
 
                 if (element.value === '') targetElement.value = ''
             }
+        } catch (error) {
+            console.log(error.message)
         }
     }
 }
@@ -145,18 +142,19 @@ const btnPrev = document.querySelector('#btn-prev')
 let id = 1
 
 
-const fetchDataTodo = (id) => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            const {title, completed, id} = data
-            cardBlock.innerHTML = `
-                <p>${title}</p>
-                <p>${completed}</p>
-                <p>${id}</p>
-            `
-        })
-        .catch((error) => console.log(error.message))
+const fetchDataTodo = async (id) => {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        const data = await response.json()
+        const {title, completed, id: todoId} = data
+        cardBlock.innerHTML = `
+            <p>${title}</p>
+            <p>${completed}</p>
+            <p>${todoId}</p>
+        `
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 const updateIdForTodo = (btnType) => {
@@ -178,12 +176,15 @@ nextAndPrev()
 
 // Fetch API
 
-const fetchDataPosts = () => {
-    console.log("Fetch запрос на https://jsonplaceholder.typicode.com/posts")
-    fetch("https://jsonplaceholder.typicode.com/posts")
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.log(error.message))
+const fetchDataPosts = async () => {
+    try {
+        console.log("Fetch запрос на https://jsonplaceholder.typicode.com/posts")
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+        const data = await response.json()
+        console.log(data)
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 
@@ -202,14 +203,20 @@ const weatherIcon = document.querySelector("#weather-icon")
 const API_URL = "http://api.openweathermap.org/data/2.5/weather"
 const API_KEY = "e417df62e04d3b1b111abeab19cea714"
 
-searchButton.onclick = () => {
-    fetch(`${API_URL}?appid=${API_KEY}&q=${searchInput.value}&units=metric`)
-        .then(response => response.json())
-        .then(data => {
-            city.innerHTML = `Город - ${data.name}` || `Город ${searchInput.value} не найден`
-            temp.innerHTML = `${data.main?.temp}` ? `Температура - ${Math.round(data.main?.temp)} &deg;` : 'Ошибка'
-            weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`
-        })
+const searchWeather = async () =>  {
+    try {
+        const response = await fetch(`${API_URL}?appid=${API_KEY}&q=${searchInput.value}&units=metric`)
+        const data = await response.json()
+        city.innerHTML = `Город - ${data.name}` || `Город ${searchInput.value} не найден`
+        temp.innerHTML = `${data.main?.temp}` ? `Температура - ${Math.round(data.main?.temp)} &deg;` : 'Ошибка'
+        weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`
 
-    searchInput.value = ''
+
+        searchInput.value = ''
+    } catch (error) {
+        console.log(error.message)
+    }
+
 }
+
+searchButton.onclick = () => searchWeather()
