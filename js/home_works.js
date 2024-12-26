@@ -176,34 +176,22 @@ resetButton.addEventListener("click", resetGame);
 
 // CHARACTERS
 
-const getCharacters = () => {
-    const request = new XMLHttpRequest()
-    request.open("GET", "../data/characters.json")
-    request.setRequestHeader("Content-Type", "application/json")
-    request.send()
-
-    request.onload = () => {
-        const data = JSON.parse(request.response)
+const getCharacters = async () => {
+    try {
+        const response = await fetch("../data/characters.json")
+        const data = await response.json()
 
         renderSection("main-characters", "Main Characters", data.main);
         renderSection("the_bishops", "The Bishops of the Old Faiths", data.the_bishops);
         renderSection("guardians", "Guardians", data.guardians);
         renderSection("knucklebone_players", "Knucklebone Players", data.knucklebone_players);
+    }catch (error) {
+        console.log(error.message)
     }
 }
 
 const renderSection = (sectionId, sectionTitle ,characters) => {
     const section = document.getElementById(sectionId)
-
-    // const header = document.createElement("div");
-    // header.setAttribute("class", "header-character");
-    // header.innerHTML = `
-    //     <img src="../images/Header_BG_Black.png" alt="${sectionTitle}">
-    //     <div class="header-info">
-    //         <h2>${sectionTitle}</h2>
-    //     </div>
-    // `;
-    // section.appendChild(header);
 
     characters.forEach((character) => {
         console.log(character.key)
@@ -221,16 +209,15 @@ const renderSection = (sectionId, sectionTitle ,characters) => {
     })
 }
 
-const getCountries = () => {
-    const request = new XMLHttpRequest()
-    request.open("GET", "../data/any.json")
-    request.setRequestHeader("Content-Type", "application/json")
-    request.send()
-
-    request.onload = () => {
-        const data = JSON.parse(request.response)
+const getCountries  = async () => {
+    try {
+        const response = await fetch("../data/any.json")
+        const data = await response.json()
         console.log(data)
+    }catch (error) {
+        console.log(error.message)
     }
+
 }
 
 getCountries()

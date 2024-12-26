@@ -18,7 +18,7 @@ const renderCharacters = async (data) => {
         card.classList.add("character_block_item")
 
         card.innerHTML = `
-            <img src="../images/Lamb.png" alt="Картинка">
+            <img src="../video/Lamb-knucklebones-idle.gif" alt="Картинка">
             <h2>${item.title}</h2>
             <p>${item.body}</p>
         `

@@ -253,7 +253,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    flex-direction: row;
     height: 100px;
+}
+
+.inner_footer_info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.inner_footer_info a{
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--beige);
+}
+
+.inner_footer_info a:hover{
+    color: var(--red);
+}
+
+.inner_footer_info img{
+    width: 135px;
+    height: 50px;
 }
 
 .footer h2 {

@@ -1,10 +1,10 @@
-
-
 .character_block {
     padding: 100px 0;
     background: var(--red);
 }
-.inner_character_block {
+
+
+.inner_character_block {;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -21,7 +21,7 @@
 }
 .character_block_item img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
 }
 .character_block_item h2 {

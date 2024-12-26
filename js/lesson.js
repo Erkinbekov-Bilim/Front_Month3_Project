@@ -208,7 +208,7 @@ const searchWeather = async () =>  {
         const response = await fetch(`${API_URL}?appid=${API_KEY}&q=${searchInput.value}&units=metric`)
         const data = await response.json()
         city.innerHTML = `Город - ${data.name}` || `Город ${searchInput.value} не найден`
-        temp.innerHTML = `${data.main?.temp}` ? `Температура - ${Math.round(data.main?.temp)} &deg;` : 'Ошибка'
+        temp.innerHTML = `${data.main?.temp}` ? `Температура: ${Math.round(data.main?.temp)} &deg;` : 'Ошибка'
         weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`
 
 
